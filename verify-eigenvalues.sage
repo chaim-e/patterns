@@ -122,7 +122,9 @@ def verify_diagonalization(k, steps):
         verbose("Testing restricted covariance coefficients ...")
         if test.nonzero_positions() == [(i,i) for i in range(test.dimensions()[0])]:
             verbose("Order n^%d term is diagonal of full rank!" % (k+s))
-            verbose("Eigenvalues: %s" % (test/factorial(k+s)*factorial(k)^2).diagonal())
+            eigval = (test/factorial(k+s)*factorial(k)^2).diagonal()
+            verbose("Eigenvalues: %s" % eigval)
+            verbose("All rational? %s" % all([x in QQ for x in eigval]))
         else:
             verbose("There's a problem! \n%s" % str(test.nonzero_positions()))
             return False
